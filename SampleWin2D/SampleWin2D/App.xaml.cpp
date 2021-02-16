@@ -30,6 +30,8 @@ App::App()
 {
     InitializeComponent();
     Suspending += ref new SuspendingEventHandler(this, &App::OnSuspending);
+    EnteredBackground += ref new EnteredBackgroundEventHandler(this, &App::onEnteringBackground);
+    LeavingBackground += ref new LeavingBackgroundEventHandler(this, &App::onLeavingBackground);
 }
 
 /// <summary>
@@ -113,4 +115,12 @@ void App::OnSuspending(Object^ sender, SuspendingEventArgs^ e)
 void App::OnNavigationFailed(Platform::Object ^sender, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs ^e)
 {
     throw ref new FailureException("Failed to load Page " + e->SourcePageType.Name);
+}
+
+void App::onEnteringBackground(Platform::Object^, EnteredBackgroundEventArgs^) {
+    enteredBackground_ = true;
+}
+
+void App::onLeavingBackground(Platform::Object^, LeavingBackgroundEventArgs^) {
+    enteredBackground_ = false;
 }

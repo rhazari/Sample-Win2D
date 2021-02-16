@@ -19,7 +19,7 @@ namespace SampleWin2D
 
 	private:
 		void Click_Me(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-		//void OnSizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventHandler^ e);
+		void OnSizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventArgs^ e);
 		void OnRegionsInvalidated(Microsoft::Graphics::Canvas::UI::Xaml::CanvasVirtualControl^ sender, Microsoft::Graphics::Canvas::UI::Xaml::CanvasRegionsInvalidatedEventArgs^ args);
 		
 		Microsoft::Graphics::Canvas::UI::Xaml::CanvasVirtualControl^ control_;

@@ -5,13 +5,7 @@
 
 #include "pch.h"
 #include "MainPage.xaml.h"
-#include <ppl.h>
-#include <ppltasks.h>
-#include <agents.h>
-#include <iostream>
 
-using namespace concurrency;
-using namespace std;
 using namespace SampleWin2D;
 
 using namespace Platform;
@@ -35,7 +29,7 @@ MainPage::MainPage()
 void SampleWin2D::MainPage::Click_Me(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e) {
     control_ = ref new CanvasVirtualControl();
 	control_->RegionsInvalidated += ref new Windows::Foundation::TypedEventHandler<Microsoft::Graphics::Canvas::UI::Xaml::CanvasVirtualControl^, Microsoft::Graphics::Canvas::UI::Xaml::CanvasRegionsInvalidatedEventArgs^>(this, &SampleWin2D::MainPage::OnRegionsInvalidated);
-	//control_->SizeChanged += ref new Windows::UI::Xaml::SizeChangedEventHandler(this, &SampleWin2D::MainPage::OnSizeChanged);
+	control_->SizeChanged += ref new Windows::UI::Xaml::SizeChangedEventHandler(this, &SampleWin2D::MainPage::OnSizeChanged);
     
     // Create a single-shot timer
     // https://docs.microsoft.com/en-us/windows/uwp/threading-async/use-a-timer-to-submit-a-work-item
@@ -52,15 +46,15 @@ void SampleWin2D::MainPage::Click_Me(Platform::Object^ sender, Windows::UI::Xaml
     }), delay);
 }
 
-//void SampleWin2D::MainPage::OnSizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventHandler^ args) {
-//	control_->Invalidate();
-//}
+void SampleWin2D::MainPage::OnSizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventArgs^ args) {
+	control_->Invalidate();
+}
 
 void SampleWin2D::MainPage::OnRegionsInvalidated(Microsoft::Graphics::Canvas::UI::Xaml::CanvasVirtualControl^ sender, Microsoft::Graphics::Canvas::UI::Xaml::CanvasRegionsInvalidatedEventArgs^ args) {
 	auto rectangle = CanvasGeometry::CreateRectangle(sender, 10, 10, 100, 100);
 	for (const auto& region : args->InvalidatedRegions) {
 		if (auto drawingSession = sender->CreateDrawingSession(region)) {
-			drawingSession->FillGeometry(rectangle, Colors::Bisque);
+			drawingSession->FillGeometry(rectangle, Colors::Blue);
 		}
 	}
 }

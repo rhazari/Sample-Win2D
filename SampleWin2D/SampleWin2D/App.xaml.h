@@ -22,6 +22,10 @@ namespace SampleWin2D
 
 	private:
 		void OnSuspending(Platform::Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
+		void onEnteringBackground(Platform::Object^, Windows::ApplicationModel::EnteredBackgroundEventArgs^);
+		void onLeavingBackground(Platform::Object^, Windows::ApplicationModel::LeavingBackgroundEventArgs^);
 		void OnNavigationFailed(Platform::Object ^sender, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs ^e);
+
+		bool enteredBackground_ = false;
 	};
 }
